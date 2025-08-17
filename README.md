@@ -23,6 +23,8 @@ A comprehensive analytics dashboard for monitoring Stripe payment metrics, featu
 ### Backend
 - **FastAPI** for high-performance API development
 - **Python** with type hints and Pydantic models
+- **PostgreSQL** support with psycopg driver
+- **uv** for fast Python dependency management
 - **CORS** enabled for cross-origin requests
 - **Automatic API documentation** with OpenAPI/Swagger
 
@@ -31,19 +33,28 @@ A comprehensive analytics dashboard for monitoring Stripe payment metrics, featu
 The application follows a clean separation between frontend and backend:
 
 ```
-stripe-dashboard-v2/
+Kiara-Stripe-Analytics/
 ├── backend/                 # FastAPI backend
 │   ├── app/
+│   │   ├── __init__.py
 │   │   └── main.py         # API endpoints and data models
-│   ├── pyproject.toml      # Python dependencies
+│   ├── tests/              # Backend tests
+│   ├── pyproject.toml      # Python dependencies (uv)
+│   ├── uv.lock            # Dependency lock file
 │   └── README.md
 └── frontend/               # React frontend
     ├── src/
     │   ├── components/     # Reusable UI components
+    │   │   ├── ui/        # shadcn/ui components
+    │   │   ├── MetricCard.tsx
+    │   │   └── MRRChart.tsx
     │   ├── services/       # API service layer
     │   ├── types/          # TypeScript type definitions
+    │   ├── hooks/          # Custom React hooks
+    │   ├── lib/            # Utility functions
     │   └── App.tsx         # Main dashboard component
     ├── package.json        # Node.js dependencies
+    ├── components.json     # shadcn/ui configuration
     └── .env               # Environment configuration
 ```
 
@@ -106,10 +117,21 @@ Currently uses dummy data for demonstration. To integrate with real Stripe data:
 
 ## 🎨 UI Components
 
+### Custom Components
 - **MetricCard**: Displays key metrics with trend indicators
 - **MRRChart**: Interactive line chart for MRR trends
 - **Responsive Grid**: Adapts to different screen sizes
 - **Loading States**: Smooth user experience during data fetching
+
+### shadcn/ui Component Library
+The project includes a comprehensive set of pre-built UI components:
+- **Layout**: Cards, Separators, Aspect Ratio, Resizable panels
+- **Navigation**: Breadcrumbs, Command palette, Menubar, Navigation menu, Pagination, Sidebar
+- **Forms**: Input, Textarea, Select, Checkbox, Radio Group, Switch, Slider, Input OTP
+- **Feedback**: Alert, Toast, Progress, Skeleton, Hover Card, Tooltip
+- **Overlay**: Dialog, Alert Dialog, Drawer, Sheet, Popover, Context Menu, Dropdown Menu
+- **Data Display**: Table, Badge, Avatar, Accordion, Collapsible, Tabs, Carousel
+- **Utility**: Button, Toggle, Toggle Group, Scroll Area, Form validation
 
 ## 🚀 Deployment
 
@@ -119,17 +141,23 @@ The application is deployed using:
 
 ## 📝 Development Notes
 
-- Uses TypeScript for type safety across the entire frontend
-- Follows React best practices with hooks and functional components
-- API service layer abstracts backend communication
-- Modular component design for easy maintenance and testing
-- Tailwind CSS for consistent and responsive styling
+- **TypeScript**: Full type safety across the entire frontend stack
+- **React Best Practices**: Functional components, custom hooks, and modern patterns
+- **Component Architecture**: Modular design with shadcn/ui for consistency
+- **API Layer**: Clean service abstraction for backend communication
+- **Styling**: Tailwind CSS with custom design system integration
+- **Development Tools**: ESLint, PostCSS, and Vite for optimal DX
+- **Dependency Management**: uv for Python, npm for Node.js
+- **Database Ready**: PostgreSQL integration prepared for production use
 
 ## 🔮 Future Enhancements
 
-- Real Stripe API integration
-- User authentication and multi-tenant support
-- Advanced filtering and date range selection
-- Export functionality for reports
-- Real-time updates with WebSocket connections
-- Additional payment analytics and insights
+- **Stripe Integration**: Replace dummy data with real Stripe API connections
+- **Authentication**: User login and multi-tenant organization support
+- **Database Integration**: Full PostgreSQL implementation for data persistence
+- **Advanced Analytics**: Custom date ranges, filtering, and drill-down capabilities
+- **Export Features**: PDF reports, CSV downloads, and scheduled reports
+- **Real-time Updates**: WebSocket connections for live dashboard updates
+- **Enhanced Visualizations**: Additional chart types and interactive analytics
+- **Mobile Optimization**: Progressive Web App (PWA) capabilities
+- **Testing Suite**: Comprehensive unit and integration test coverage
